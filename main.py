@@ -1,6 +1,6 @@
 from tkinter import Tk, BOTH, Canvas
 from geometry import Point, Line
-from maze import Cell
+from maze import Maze
 
 class Window:
     def __init__(self, width, height):
@@ -12,9 +12,12 @@ class Window:
         self.canvas.pack()
         self.running = False
         self.root.protocol("WM_DELETE_WINDOW", self.close)
-
     
     def redraw(self):
+        # Frameworks like Tkinter work sort of in an event loop. self.root is a GUI. updating it means getting all the key
+        # presses, mouse clicks etc. Widget is something is displayed on the GUI. Now, canvas is a widget. When we update the 
+        # canvas, the GUI needs to use this updated canvas. If we don't update the GUI, we won't see what new thing is added on 
+        # the canvas. 
         self.root.update_idletasks()
         self.root.update()
     
@@ -30,10 +33,6 @@ class Window:
         self.running = False
 
 if __name__ == "__main__":
-    win = Window(800, 600)
-    cell1 = Cell(10,10,50,50, win)
-    cell2 = Cell(100, 100, 150, 150, win)
-    cell1.draw()
-    cell2.draw()
-    cell1.draw_move(cell2, undo=True)
+    win = Window(810, 610)
+    maze = Maze(10, 10, 16, 12, 50, 50, win)
     win.wait_for_close()
