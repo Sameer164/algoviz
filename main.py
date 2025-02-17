@@ -34,5 +34,6 @@ class Window:
 
 if __name__ == "__main__":
     win = Window(810, 610)
-    maze = Maze(10, 10, 16, 12, 50, 50, win)
+    maze = Maze(x1=10, y1=10, num_rows=10, num_cols=15, cell_size_x=50, cell_size_y=50, win=win, seed = 5)
+    maze.solve()
     win.wait_for_close()
